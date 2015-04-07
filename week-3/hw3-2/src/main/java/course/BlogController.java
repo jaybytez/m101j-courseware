@@ -296,28 +296,6 @@ public class BlogController {
             }
         });
 
-        get("/welcome", new FreemarkerBasedRoute("welcome.ftl") {
-            @Override
-            protected void doHandle(Request request, Response response, Writer writer) throws IOException, TemplateException {
-
-                String cookie = getSessionCookie(request);
-                String username = sessionDAO.findUserNameBySessionId(cookie);
-
-                if (username == null) {
-                    System.out.println("welcome() can't identify the user, redirecting to signup");
-                    response.redirect("/signup");
-
-                }
-                else {
-                    SimpleHash root = new SimpleHash();
-
-                    root.put("username", username);
-
-                    template.process(root, writer);
-                }
-            }
-        });
-
         // process a new comment
         post("/newcomment", new FreemarkerBasedRoute("entry_template.ftl") {
             @Override
