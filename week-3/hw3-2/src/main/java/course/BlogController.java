@@ -1,19 +1,3 @@
-/*
- * Copyright 2015 MongoDB, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package course;
 
 import com.mongodb.MongoClient;
@@ -100,7 +84,7 @@ public class BlogController {
         }
 
         protected abstract void doHandle(final Request request, final Response response, final Writer writer)
-        throws IOException, TemplateException;
+                throws IOException, TemplateException;
 
     }
 
@@ -193,7 +177,7 @@ public class BlogController {
         get("/signup", new FreemarkerBasedRoute("signup.ftl") {
             @Override
             protected void doHandle(Request request, Response response, Writer writer)
-            throws IOException, TemplateException {
+                    throws IOException, TemplateException {
 
                 SimpleHash root = new SimpleHash();
 
@@ -209,9 +193,6 @@ public class BlogController {
                 template.process(root, writer);
             }
         });
-
-
-
 
         get("/welcome", new FreemarkerBasedRoute("welcome.ftl") {
             @Override
@@ -234,7 +215,6 @@ public class BlogController {
                 }
             }
         });
-
 
         // will present the form used to process new blog posts
         get("/newpost", new FreemarkerBasedRoute("newpost_template.ftl") {
@@ -260,7 +240,7 @@ public class BlogController {
         post("/newpost", new FreemarkerBasedRoute("newpost_template.ftl") {
             @Override
             protected void doHandle(Request request, Response response, Writer writer)
-            throws IOException, TemplateException {
+                    throws IOException, TemplateException {
 
                 String title = StringEscapeUtils.escapeHtml4(request.queryParams("subject"));
                 String post = StringEscapeUtils.escapeHtml4(request.queryParams("body"));
@@ -300,7 +280,7 @@ public class BlogController {
         post("/newcomment", new FreemarkerBasedRoute("entry_template.ftl") {
             @Override
             protected void doHandle(Request request, Response response, Writer writer)
-            throws IOException, TemplateException {
+                    throws IOException, TemplateException {
                 String name = StringEscapeUtils.escapeHtml4(request.queryParams("commentName"));
                 String email = StringEscapeUtils.escapeHtml4(request.queryParams("commentEmail"));
                 String body = StringEscapeUtils.escapeHtml4(request.queryParams("commentBody"));
